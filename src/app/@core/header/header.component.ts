@@ -5,6 +5,7 @@ import { map, takeUntil, filter } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { items } from 'src/app/_shared/model/menu-model';
 
 @Component({
     selector: 'png-header',
@@ -23,41 +24,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
      constructor(){
          
      }   
-        ngOnInit(){
-        this.items = [
-          {
-              label: 'Home',
-              icon:'pi pi-fw pi-home',
-              routerLink:'/home',
-              routerLinkActiveOptions:'active',
-              styleClass:'menupanel'
-          },
-          {
-            label: 'Products',
-            icon:'pi pi-fw pi-briefcase',
-            routerLink:'#',
-            styleClass:'menupanel'
-        },
-        {
-            label: 'Blogs',
-            icon:'pi pi-fw pi-comments',
-            routerLink:'#',
-            styleClass:'menupanel'
-        },
-        {
-            label: 'Community',
-            icon:'pi pi-fw pi-globe',
-            routerLink:'#',
-            styleClass:'menupanel'
-        },
-        {
-            label: 'AboutUs',
-            icon:'pi pi-fw pi-book',
-            routerLink:'#',
-            styleClass:'menupanel'
-        }]
-      }
+    ngOnInit(){
+        this.items=items
+    }
     ngOnDestroy(){
-
     }
 }

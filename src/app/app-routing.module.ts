@@ -8,7 +8,7 @@ export const routes: Routes = [
         .then(m => m.HomeModule) 
   },
   {
-        path: 'community',
+        path: 'products',
         loadChildren: () => import('./community/community.module')
           .then(m => m.CommunityModule),
       },
