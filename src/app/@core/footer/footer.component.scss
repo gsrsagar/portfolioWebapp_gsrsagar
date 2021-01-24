@@ -1,0 +1,21 @@
+
+@import '~bootstrap/scss/mixins/breakpoints';
+
+
+.created-by {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  color: rgb(158, 157, 157);
+  text-align: center;
+}
+
+// .colors{
+//   footermiddle-background: #eeeeee;
+//   footertop-background:#f7f7f7;
+//   text: #3f3846;
+//   headings:#cdd6dc
+
+// }

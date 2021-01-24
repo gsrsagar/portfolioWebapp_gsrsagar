@@ -1,11 +1,49 @@
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 
+export const routes: Routes = [
+  {
+    path: '',
+    loadChildren:() => import('./home/home.module')
+        .then(m => m.HomeModule) 
+  },
+  {
+        path: 'community',
+        loadChildren: () => import('./community/community.module')
+          .then(m => m.CommunityModule),
+      },
+      {
+        path: 'courses',
+        loadChildren: () => import('./courses/courses.module')
+          .then(m => m.CoursesModule),
+      },
+      {
+        path: 'chats',
+        loadChildren: () => import('./chats/chats.module')
+          .then(m => m.ChatsModule),
+      },
+      {
+        path: 'blogs',
+        loadChildren: () => import('./blogs/blogs.module')
+          .then(m => m.BlogsModule),
+      },
+      {
+        path: 'donate',
+        loadChildren: () => import('./donate/donate.module')
+          .then(m => m.DonateModule),
+      },
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '' },
+];
 
-const routes: Routes = [];
+const config: ExtraOptions = {
+  useHash: true,
+  onSameUrlNavigation: "reload"
+};
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, config)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

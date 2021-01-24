@@ -1,0 +1,24 @@
+
+@import '~bootstrap/scss/mixins/breakpoints';
+
+
+
+// nb-sidebar,
+// nb-sidebar > div.main-container {
+//   transition: width 0.4s;
+// }
+
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  color: white;
+  text-align: center;
+}
+
+.body{
+  color:black;
+}

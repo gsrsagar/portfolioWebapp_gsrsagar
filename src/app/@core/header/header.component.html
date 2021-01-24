@@ -1,0 +1,14 @@
+<div class="header-container">
+  <div class="header-title">
+      <img src="assets/logo/rev-29.jpg" height="50" id="logo" class="p-mr-2">  
+      <span class="titlefirst">Margey</span><span class="titlesecond">Labs</span>
+  </div>
+  <p-menubar [model]="items" styleClass="menucus"  responsive start>
+    <ng-template pTemplate="end" class="profile-container">
+      <div>
+        <img src="../../../assets/icons/profile2.png" class="userprofile" alt="" width="60" height="50" />
+      </div>
+   </ng-template>
+  </p-menubar>
+  <router-outlet></router-outlet>
+</div>
