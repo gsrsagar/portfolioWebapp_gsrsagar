@@ -109,10 +109,10 @@ img {
       justify-content: center;
       align-items: center;
   }
-  button{
-      background-color:#0C9ED2 ;
-      color: white;
-  }
+  // .p-button{
+  //     background-color:red ;
+  //     color: white;
+  // }
   button:hover{
     background-color:#909191 ;
     color:#0C9ED2;
@@ -123,3 +123,16 @@ img {
     justify-content: center;
     align-items: center;
   }
+  // #advertisetitles{
+  //   background-color:crimson ;
+  // }
+
+  #advertisetitles {
+    color: #ffffff;
+    background: red;
+    border: 1px solid #2196F3;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 3px;
+}

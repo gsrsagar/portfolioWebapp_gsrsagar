@@ -13,4 +13,10 @@ export class CarService {
             .then(res => <Car[]> res.data)
             .then(data => data);
     }
+    getStates() {
+        return this.http.get<any>('../../../assets/data/states-districts.json')
+            .toPromise()
+            .then(res => <any>res.states)
+            .then(states => states);
+    }
 }

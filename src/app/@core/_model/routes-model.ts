@@ -3,5 +3,6 @@ export enum  RoutesEnum{
     APPS='products',
     CHATS='chats',
     BLOGS='blogs',
-    DONATE='donate'
+    DONATE='donate',
+    RESUMEBUILDER='resumebuilder'
 }

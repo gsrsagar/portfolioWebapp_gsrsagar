@@ -1,0 +1,96 @@
+body{
+ background-color: white;
+}
+img{
+    height:300px;;
+    max-width:300px;;
+}
+h2{
+    text-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    color: #0C9ED2; 
+    font-weight:400;
+    margin-left: 5px;
+    background-color:transparent;
+}
+h5{
+    text-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    color:black; 
+    font-weight:300;
+    background-color:transparent;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    margin-right:2px;;
+    margin-left:4px;
+    background-color: #f1f1f1;
+}
+// .row{
+//     justify-items: center;
+//     align-content: center;
+//     align-items: center;
+//     justify-content: center;
+// }
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  
+.col{
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+#appdiv{
+    display: flex;
+    justify-items: auto;
+    justify-content: center;
+    align-content: center;
+}
+span{
+    box-shadow: 5px 4px 5px 5px solid black;
+}
+
+.p-button-info::active{
+    background-color: black;
+    color:white;
+}
+// span{
+//     color:#909191;;
+//     margin-top:20px;
+//     font-weight: 600;
+//     font-family: inherit;
+//     font-size: 1.5rem;
+//     justify-items: center;
+//     align-content: center;
+//     align-items:center;
+//     justify-content: center;
+//     text-align:center;
+// }

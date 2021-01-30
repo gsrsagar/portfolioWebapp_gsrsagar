@@ -79,7 +79,8 @@ import {TerminalModule} from 'primeng/terminal';
 import {TagModule} from 'primeng/tag';
 import {ObjectUtils} from 'primeng/utils';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
-
+import { CardsModule } from 'angular-bootstrap-md';
+import {CardModule} from 'primeng/card';
 
 const PRIMENG_MODULES = [
  AccordionModule,
@@ -160,7 +161,8 @@ const PRIMENG_MODULES = [
  TerminalModule,
  TreeTableModule,
  VirtualScrollerModule,
- ChartModule
+ ChartModule,
+ CardModule
 ];
 
 @NgModule({

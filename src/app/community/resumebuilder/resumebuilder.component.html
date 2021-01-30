@@ -1,0 +1,81 @@
+<body>
+    <div class="row" style="margin-top:10px;">
+        <h2>Resume Builder</h2>
+    </div> 
+    <div class="card" style="margin-top:20px;">
+        <div class="row">
+            <h5>Personal Details</h5>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-md-5" style="margin-top:20px;">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-pencil"></i>
+                    <input type="text" pInputText placeholder="Full Name">         
+                </span>
+            </div>
+            <div class="col-md-5" style="margin-top:20px;">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-pencil"></i>
+                    <input type="text" pInputText placeholder="Email Id">         
+                </span>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-md-5" style="margin-top:20px;">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-pencil"></i>
+                    <input type="text" pInputText placeholder="Contact No">         
+                </span>
+            </div>
+            <div class="col-md-5" style="margin-top:20px;">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-pencil"></i>
+                <p-dropdown [options]="states" (ngModelChange)="onStateChange($event)" placeholder="--Choose State Below--" [(ngModel)]="education" optionLabel="state"></p-dropdown>
+                </span>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-md-5" style="margin-top:20px;">
+                <span class="p-input-icon-right">
+                    <i class="pi pi-pencil"></i>
+                <p-dropdown [options]="districtsarray" (ngModelChange)="onDistrictChange($event)" placeholder="-Choose District Below-" [(ngModel)]="education1" optionLabel="name" ></p-dropdown>
+                </span>
+            </div>
+            <div class="col-md-5" style="margin-top:20px;">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-pencil"></i>
+                    <input type="text" pInputText placeholder="Social Profile">         
+                </span>
+            </div>
+        </div>
+    </div>  
+    <div class="row"> 
+        <div class="column" style="margin-top:20px;">
+          <div class="card">
+            <h3>Card 2</h3>
+            <p>Some text</p>
+            <p>Some text</p>
+          </div>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="column" style="margin-top:20px;">
+            <div class="card">
+              <h3>Card 3</h3>
+              <p>Some text</p>
+              <p>Some text</p>
+            </div>
+          </div>
+    </div>    
+    <div class="row">
+        <div class="column" style="margin-top:20px;">
+            <div class="card">
+              <h3>Card 4</h3>
+              <p>Some text</p>
+              <p>Some text</p>
+            </div>
+        </div>
+    </div>
+    <br/>
+</body>
+
