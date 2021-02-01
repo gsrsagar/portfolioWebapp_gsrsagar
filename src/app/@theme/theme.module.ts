@@ -81,9 +81,10 @@ import {ObjectUtils} from 'primeng/utils';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { CardsModule } from 'angular-bootstrap-md';
 import {CardModule} from 'primeng/card';
-
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 const PRIMENG_MODULES = [
  AccordionModule,
+ BsDatepickerModule,
  AutoCompleteModule,
  AvatarModule,
  AvatarGroupModule,

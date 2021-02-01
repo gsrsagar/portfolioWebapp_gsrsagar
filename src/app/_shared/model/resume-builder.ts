@@ -2,7 +2,8 @@
 export class PersonalDetails{
     fullName:string;
     emailId:string;
-    contactNo:number;
+    contactNo:any;
+    country:any;
     state:string;
     district:string;
     githubProfile:string;
@@ -13,8 +14,14 @@ export class PersonalDetails{
 export class Education{
     educationType:string;
     institutionName:string;
+    branch:string;
+    district:string;
+    state:string;
+    country:string;
     yearOfPassing:number;
     percentage:number;
+    startDate:any;
+    endDate:any;
 }
 
 export class Skills{
@@ -26,6 +33,9 @@ export class Skills{
 export class Experience{
     employer:string;
     jobTitle:string;
+    country:any;
+    state:any;
+    city:any;
     jobDescription:string;
     experience:number;
     fromDate:any;
@@ -33,6 +43,16 @@ export class Experience{
 }
 export class CareerObjective{
     careerObjective:string;
+}
+
+export class Project{
+    constructor(){
+        this.skills=new Array<Skills>();
+    }
+    title:string;
+    description:string;
+    skills:Skills[];
+    link:string;
 }
 export class ResumeBuilder{
     constructor(){
@@ -67,26 +87,45 @@ export const personaldetailsMock:any={
     emailId:'sagarreddyguvvala@gmail.com',
     state:'Andhra Pradesh',
     district:'Nellore',
+    country:'India',
     githubProfile:'https://github.com/gsrsagar',
     linkedInProfile:'https://www.linkedin.com/in/sagar-reddy-guvvala-a76612176/',
     codingProfile:''
 }
 export const educationMock:Education[]=[
     {
-        educationType:'B.Tech , Computer Science And Engineering',
+        educationType:'B.Tech',
+        branch:'Computer Science and Engineering',
         institutionName:'Priyadarshini College of Engineering, Nellore',
+        district:'Nellore',
+        state:'Andhra Pradesh',
+        country:'India',
         percentage:71,
+        startDate:new Date(),
+        endDate:new Date(),
         yearOfPassing:2019
     },
     {
         educationType:'Intermediate',
         institutionName:'SriChaitanya Junior College',
+        district:'Nellore',
+        state:'Andhra Pradesh',
+        country:'India',
+        branch:'MPC',
         percentage:91,
+        startDate:new Date(),
+        endDate:new Date(),
         yearOfPassing:2015
     },
     {
         educationType:'10th Standard',
         institutionName:'MSM MCHS AC NAGAR , Nellore',
+        district:'Nellore',
+        state:'Andhra Pradesh',
+        country:'India',
+        branch:'',
+        startDate:new Date(),
+        endDate:new Date(),
         percentage:92,
         yearOfPassing:2013
     }
@@ -95,13 +134,30 @@ export const educationMock:Education[]=[
 export const experienceMock:Experience[]=[
     {
         jobTitle:'Associate Software Engineer',
-        employer:'Mphasis India Ltd.',
-        jobDescription:`Manage website development projects from intial development to the final completion, optimizing all 
+        employer:'Mphasis',
+        country:'India',
+        state:'Maharashtra',
+        city:'Pune',
+        jobDescription:`Worked as a full stack developer, by Managing website development projects from intial development to the final completion, optimizing all 
         cross-browser and multi-platform compatibility , work closely with the programmers and clients to meet projects requirements ,goals and 
         desired functionality`,
         experience:2.5,
-        fromDate:'Jun 2019',
-        toDate:'Present'
+        fromDate:new Date(),
+        toDate:new Date()
+
+    },
+    {
+        jobTitle:'Associate Software Engineer',
+        employer:'Mphasis',
+        country:'India',
+        state:'Maharashtra',
+        city:'Pune',
+        jobDescription:`Worked as a full stack developer, by Managing website development projects from intial development to the final completion, optimizing all 
+        cross-browser and multi-platform compatibility , work closely with the programmers and clients to meet projects requirements ,goals and 
+        desired functionality`,
+        experience:2.5,
+        fromDate:new Date(),
+        toDate:new Date()
 
     }
 ]
@@ -120,4 +176,20 @@ export const skillsMock:Skills[]=[
     {skill:'SQL',class:'',classIndex:0},
     {skill:'C#',class:'',classIndex:0},
     {skill:'Algorithms',class:'',classIndex:0}
+]
+
+
+export const projectsMock:Project[]=[
+    {
+        title:'Resume Builder App',
+        description:`I developed this project as a part of my hands-on in the latest technology like Angular 9 and Django 
+        Rest API that having all the features like printing as pdf , convert to document, proper validations , social login
+        and good Authentication techniques are used to showcase my skills`,
+        skills:[
+            {skill:'Angular 9',class:'',classIndex:0},
+            {skill:'DJango Rest API',class:'',classIndex:0},
+            {skill:'Mongo DB',class:'',classIndex:0}
+        ],
+        link:'https://github.com/gsrsagar'
+    }
 ]

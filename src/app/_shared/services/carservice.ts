@@ -19,4 +19,11 @@ export class CarService {
             .then(res => <any>res.states)
             .then(states => states);
     }
+
+    getCountryCodes(){
+        return this.http.get<any>('../../../assets/data/country-codes.json')
+            .toPromise()
+            .then(res=>res.countries)
+            .then(countries=>countries);
+    }
 }
