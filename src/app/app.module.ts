@@ -16,6 +16,7 @@ import { CoreModule } from './@core/core.module';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { MDBBootstrapModule, IconsModule } from 'angular-bootstrap-md';
 
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
