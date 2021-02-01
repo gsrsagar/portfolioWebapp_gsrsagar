@@ -15,6 +15,7 @@ import { CarService } from './_shared/services/carservice';
 import { CoreModule } from './@core/core.module';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { MDBBootstrapModule, IconsModule } from 'angular-bootstrap-md';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 // AoT requires an exported function for factories
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CoreModule.forRoot(),
     CollapseModule.forRoot(),
     MDBBootstrapModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     InputTextModule,
     TranslateModule.forRoot({
       loader: {

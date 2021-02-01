@@ -1,10 +1,10 @@
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <body>
     <div class="row" style="margin-top:10px;">
         <h3>Resume Builder</h3>
     </div> 
     <form #personalform="ngForm" novalidate>
-        <div class="card" style="margin-top:20px;">
+        <div class="card" style="margin-top:20px;text-align:center;">
             <div class="row">
                 <div class="col">
                     <span>
@@ -25,6 +25,17 @@
                 </div>
                 <div class="col-sm-3" style="margin-top:20px;">
                     <span class="p-input-icon-left">
+                        <i class="pi pi-pencil"></i>
+                    <p-dropdown [options]="countryCodes"  [(ngModel)]="personaldetails.country" (ngModelChange)="onCountryChange($event)" 
+                    placeholder="Select Country Below *" optionLabel="name"
+                    #country="ngModel" name="stateinput" id="stateinput"  required
+                    [ngClass]="{ 'input-border-green' : !(personalDetailsSubmitted && country.invalid),
+                    'input-border-red': personalDetailsSubmitted && (country.invalid )}"
+                    ></p-dropdown>
+                    </span>
+                </div>
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-left">
                         <i class="pi pi-envelope"></i>
                         <input type="text"  [(ngModel)]="personaldetails.emailId" pInputText placeholder="Email Id *"
                         #emailid="ngModel" name="emailid" id="emailid" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
@@ -41,31 +52,31 @@
                 <div class="col-sm-3" style="margin-top:20px;">
                     <span class="p-input-icon-left">
                         <i class="pi pi-phone"></i>
-                        <input type="number" [(ngModel)]="personaldetails.contactNo" pInputText placeholder="Contact No *"
-                        #contactno="ngModel" name="contactno" id="contactno"  required
+                        <input type="text" [(ngModel)]="personaldetails.contactNo" pInputText placeholder="Contact No *"
+                        #contactno="ngModel" (keypress)="onNumberKeyPress($event)" name="contactno" id="contactno"  required
                         [ngClass]="{ 'input-border-green' : !(personalDetailsSubmitted && contactno.invalid),
                         'input-border-red': personalDetailsSubmitted && (contactno.invalid )}"
                         />         
                     </span>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-3" style="margin-top:20px;">
                     <span class="p-input-icon-left">
                         <i class="pi pi-pencil"></i>
                     <p-dropdown [options]="states"  [(ngModel)]="personaldetails.state" (ngModelChange)="onStateChange($event)" 
-                    placeholder="Choose State Below *" style="font-size:13px;" [(ngModel)]="education" optionLabel="state"
+                    placeholder="Choose State Below *" optionLabel="state"
                     #stateinput="ngModel" name="stateinput" id="stateinput"  required
                     [ngClass]="{ 'input-border-green' : !(personalDetailsSubmitted && stateinput.invalid),
                     'input-border-red': personalDetailsSubmitted && (stateinput.invalid )}"
                     ></p-dropdown>
                     </span>
                 </div>
-            </div>
-            <div class="row" style="margin-top:20px;">
-                <div class="col" style="margin-top:20px;">
+                <div class="col-sm-3" style="margin-top:20px;">
                     <span class="p-input-icon-right">
                         <i class="pi pi-pencil"></i>
                     <p-dropdown [options]="districtsarray"  [(ngModel)]="personaldetails.district"
-                     (ngModelChange)="onDistrictChange($event)" placeholder="Choose District Below *" style="font-size:13px;" [(ngModel)]="education1" 
+                     (ngModelChange)="onDistrictChange($event)" placeholder="Choose District Below *" [(ngModel)]="education1" 
                      optionLabel="name"   #districtinput="ngModel" name="stateinput" id="stateinput"  required
                      [ngClass]="{ 'input-border-green' : !(personalDetailsSubmitted && stateinput.invalid),
                      'input-border-red': personalDetailsSubmitted && (stateinput.invalid )}"
@@ -88,6 +99,8 @@
                         class="input-border-green" placeholder="LinkedIn Profile Link">  
                     </span>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-3" style="margin-top:20px;">
                     <span class="p-input-icon-left">
                         <i class="pi pi-external-link"></i>
@@ -99,7 +112,7 @@
         </div>  
     </form>
     <form #skillsform="ngForm" novalidate>
-        <div class="card" style="margin-top:20px;">
+        <div class="card" style="margin-top:20px;text-align:center;">
             <div class="row">
                 <div class="col">
                     <span>
@@ -119,15 +132,15 @@
                     </span>
                 </div>
             </div>
-            <div class="row" style="margin-top:15px;">
-                 <div class="col" *ngFor="let opt of skillsList;let i=index"style="margin-left:0px;">
-                    <button pButton pRipple  type="button" (click)="editSkill(opt.skill,i)" [label]="opt.skill" [className]="opt.class"></button>
+            <div *ngIf="skillsList?.length" class="row" style="margin-top:15px;">
+                <div class="col" *ngFor="let opt of skillsList;let i=index">
+                    <p-chip styleClass="icon-chip-class"  [label]="opt.skill" (click)="editSkill(opt.skill,i)"  [removable]="true"></p-chip>
                 </div>
             </div>
         </div>
     </form>
     <form #experienceform="ngForm" novalidate>  
-        <div class="card" style="margin-top:20px;">
+        <div class="card" style="margin-top:20px;text-align:center;">
             <div class="row">
                 <div class="col">
                     <span>
@@ -170,6 +183,24 @@
                     placeholder="Experience in Months Ex: 3 Months">         
                 </span>
                 </div>
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-calendar-plus"></i>
+                        <input type="date" bsDatePicker name="fromdate" id="fromdate" [(ngModel)]="experience.fromDate" pInputText
+                        #fromdate="ngModel" [ngClass]="{ 'input-border-green' : !(experienceSubmitted && fromdate.invalid),
+                        'input-border-red': experienceSubmitted && fromdate.invalid}"
+                        >      
+                    </span>
+                </div>
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-calendar-plus"></i>
+                        <input type="date" bsDatePicker name="todate" id="todate" [(ngModel)]="experience.toDate" pInputText
+                        #todate="ngModel"  [ngClass]="{ 'input-border-green' : !(experienceSubmitted && todate.invalid),
+                        'input-border-red': experienceSubmitted && todate.invalid}"
+                       >         
+                    </span>
+                </div>
             </div>
             <div class="row" style="margin-top:20px;" *ngFor="let value of experienceList;let i=index">
                 <div class="col-sm-4" style="margin-left:0px;">
@@ -190,7 +221,7 @@
         </div> 
     </form>   
     <form #educationform="ngForm" novalidate>
-        <div class="card" style="margin-top:20px;">
+        <div class="card" style="margin-top:20px;text-align:center;">
             <div class="row">
                 <div class="col">
                     <span>
@@ -204,10 +235,20 @@
                     <span class="p-input-icon-left">
                         <i class="pi pi-globe"></i>
                         <input type="text" name="educationtype" id="educationtype" [(ngModel)]="education.educationType"
-                        #educationtype="ngModel" [required]="educationList?.length==0" 
+                        #educationtype="ngModel"
                         [ngClass]="{ 'input-border-green' : !(educationSubmitted && educationtype.invalid),
                        'input-border-red': educationSubmitted && educationtype.invalid}"
-                         pInputText placeholder="School/Grad ,Branch *"/>         
+                         pInputText placeholder="School/Graduation *"/>         
+                    </span>
+                </div>
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-ellipsis-h"></i>
+                        <input type="text" name="branch" id="branch" [(ngModel)]="education.branch"
+                        #branch="ngModel" [required]="educationList?.length==0" 
+                        [ngClass]="{ 'input-border-green' : !(educationSubmitted && branch.invalid),
+                       'input-border-red': educationSubmitted && branch.invalid}"
+                         pInputText placeholder="Branch *"/>         
                     </span>
                 </div>
                 <div class="col-sm-3" style="margin-top:20px;">
@@ -231,18 +272,105 @@
                         />         
                     </span>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-3" style="margin-top:20px;">
                     <span class="p-input-icon-left">
                         <i class="pi pi-percentage"></i>
-                        <input type="text" [(ngModel)]="education.percentage" pInputText placeholder="Percentage *"
+                        <input type="text" (keypress)="onNumberKeyPress($event)" [(ngModel)]="education.percentage" pInputText placeholder="Percentage *"
                         name="percentagefield" id="percentagefield" #percentagefield="ngModel" [required]="educationList?.length==0" 
                         [ngClass]="{ 'input-border-green' : !(educationSubmitted && percentagefield.invalid),
                        'input-border-red': educationSubmitted && percentagefield.invalid}"
                         />         
                     </span>
                 </div>
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-pencil"></i>
+                    <p-dropdown [options]="countryCodes"  [(ngModel)]="education.country" (ngModelChange)="onCountryChange($event)" 
+                    placeholder="Select Country Below *" optionLabel="name" [required]="educationList?.length==0" 
+                    #educountry="ngModel" name="educountry" id="educountry" 
+                    [ngClass]="{ 'input-border-green' : !(educationSubmitted && educountry.invalid),
+                    'input-border-red': educationSubmitted && (educountry.invalid )}"
+                    ></p-dropdown>
+                    </span>
+                </div>
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-pencil"></i>
+                    <p-dropdown [options]="states"  [(ngModel)]="education.state" (ngModelChange)="onStateChange($event)" 
+                    placeholder="Choose State Below *" optionLabel="state"
+                    #edustateinput="ngModel" name="edustateinput" id="edustateinput" [required]="educationList?.length==0" 
+                    [ngClass]="{ 'input-border-green' : !(educationSubmitted && edustateinput.invalid),
+                    'input-border-red': educationSubmitted && (edustateinput.invalid )}"
+                    ></p-dropdown>
+                    </span>
+                </div>
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-right">
+                        <i class="pi pi-pencil"></i>
+                    <p-dropdown [options]="districtsarray"  [(ngModel)]="education.district"
+                     (ngModelChange)="onDistrictChange($event)" placeholder="Choose District Below *" [(ngModel)]="education1" 
+                     optionLabel="name"   #edudistrictinput="ngModel" name="edudistrictinput" id="edudistrictinput"  [required]="educationList?.length==0" 
+                     [ngClass]="{ 'input-border-green' : !(educationSubmitted && edudistrictinput.invalid),
+                     'input-border-red': educationSubmitted && (edudistrictinput.invalid )}"
+                     ></p-dropdown>
+                    </span>
+                </div>
             </div>
-            <div class="row" *ngIf="educationList?.length" style="margin-top:20px;">
+            <div class="row">
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-calendar-plus"></i>
+                        <input type="date" bsDatePicker name="startdate" id="startdate" [(ngModel)]="education.startDate" pInputText
+                        #startdate="ngModel" [required]="educationList?.length==0" [ngClass]="{ 'input-border-green' : !(educationSubmitted && startdate.invalid),
+                        'input-border-red': educationSubmitted && startdate.invalid}"
+                        >      
+                    </span>
+                </div>
+                <div class="col-sm-3" style="margin-top:20px;">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-calendar-plus"></i>
+                        <input type="date" bsDatePicker name="enddate" id="enddate" [(ngModel)]="education.endDate" pInputText
+                        #enddate="ngModel" [required]="educationList?.length==0" [ngClass]="{ 'input-border-green' : !(educationSubmitted && enddate.invalid),
+                        'input-border-red': educationSubmitted && enddate.invalid}"
+                       >         
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="educationList?.length">
+                <div  *ngFor="let value of educationList" (click)="editEducation(value)" class="card" style="margin-top:20px;margin-left:20px;margin-right:20px;">
+                    <b  style="margin-left:20px;">EDUCATION</b>
+                    <div *ngIf="educationList?.length" style="margin-bottom:20px;">
+                        <div style="margin-left:20px;margin-top:20px;margin-right:20px;">
+                            <div class="row">
+                                <div class="col-sm-6" style="font-size:13px;font-weight:700;">
+                                    {{value?.educationType}} 
+                                    <span *ngIf="value?.branch" style="margin-left:10px;">
+                                       <span style="font-weight:500;">in</span>&nbsp;{{value?.branch}}
+                                    </span>
+                                </div>
+                                <div class="col" style="font-size:11px;font-weight:700;">
+                                    <i><span style="font-size:small">{{value?.district}},</span>&nbsp;{{value?.state}}&nbsp;
+                                        <span>,{{value?.country}}</span></i>
+                                 </div>
+                                 <div class="col" style="font-size:11px;font-weight:700;">
+                                    {{value?.startDate | date:'mediumDate'}} to {{value?.endDate | date:'mediumDate'}}
+                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col" style="font-size:13px;font-weight:500;">
+                                    {{value?.institutionName}}  
+                                    <span>
+                                        &nbsp; - {{value?.percentage}} %
+                                    </span>
+                                </div>
+                            </div>   
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <!-- <div class="row" *ngIf="educationList?.length" style="margin-top:20px;">
                 <p-table [columns]="cols" [value]="educationList" styleClass="p-datatable-responsive-demo">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -252,18 +380,18 @@
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
-                        <tr>
+                        <tr (click)="editEducation(rowData[columns])">
                             <td *ngFor="let col of columns">
                                 {{rowData[col.field]}}
                             </td>
                         </tr>
                     </ng-template>
                 </p-table>
-            </div>
+            </div> -->
         </div>
     </form>
     <form #careerObjectiveform="ngForm" novalidate>
-        <div class="card" style="margin-top:20px;margin-bottom:10px;">
+        <div class="card" style="margin-top:20px;margin-bottom:10px;text-align:center;">
             <div class="row">
                 <div class="col">
                     <span>
@@ -330,36 +458,34 @@
         <p-skeleton height="2rem" styleClass="p-mb-2"></p-skeleton>
         <p-skeleton width="10rem" height="4rem"></p-skeleton>
     </div>
-</div>     -->
+</div>    
 
- <div class="card" id="resumeCard" *ngIf="preparedResume" style="margin-top:10px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:black;">
-    <div class="col">
+ <div class="card" id="resumeCard" *ngIf="preparedResume" style="margin-top:20px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:black;">
+    <div class="col" style="margin-top:20px;">
         <span><h5><b>{{personalDatamock.fullName.toUpperCase()}}</b></h5></span>
     </div>
-    <div class="row" style="margin-top:20px;">
-        <div class="col">
+    <div class="row" style="margin-top:20px;margin-left:20px;">
+        <div class="col-sm-4">
             <i class="pi pi-envelope"></i>&nbsp;
             <span>{{personalDatamock.emailId}}</span>
         </div>
-        <div class="col">
+        <div class="col-sm-2">
             <i class="pi pi-phone"></i>&nbsp;
             <span>{{personalDatamock.contactNo}}</span>
         </div>
         <div class="col">
-            <i class="pi pi-map"></i>&nbsp;
-            <span>{{personalDatamock.state}}</span>
-        </div>
-        <div class="col">
             <i class="pi pi-map-marker"></i>&nbsp;
-            <span>{{personalDatamock.district}}</span>
+             <span>{{personalDatamock.district}}</span>,
+             <span>{{personalDatamock.state}}</span>,
+             <span>{{personalDatamock.country}}</span>
         </div>
     </div>
     <hr/>
-    <b>CAREER OBJECTIVE</b>
-    <p *ngIf="careerObjectiveMock?.careerObjective">
+    <b style="margin-left:20px;">CAREER OBJECTIVE</b>
+    <p style="margin-left:20px;margin-right:20px;margin-top:10px;" *ngIf="careerObjectiveMock?.careerObjective">
         {{careerObjectiveMock?.careerObjective}} 
      </p>
-     <div class="row" style="margin-top:20px;">
+     <div class="row" style="margin-top:20px;margin-left:20px;margin-right:20px;">
         <div *ngIf="personalDatamock?.githubProfile" class="col">
             <i class="pi pi-github"></i>&nbsp;
             {{personalDatamock?.githubProfile}}
@@ -378,33 +504,90 @@
     </div>
     <hr/>
      <div *ngIf="skillsMockData?.length">
-        <b>SKILLS</b>
-        <div class="row" style="margin-top:10px;">
+        <b style="margin-left:20px;">SKILLS</b>
+        <div class="row" style="margin-top:20px;margin-left:20px;margin-right:20px;">
             <div *ngFor="let skill of skillsMockData" class="col">
                 <span id="skillslistsection">{{skill.skill}}</span>
             </div>
         </div>
      </div>
      <hr/>
-    <b *ngIf="experienceMockdata?.length">PROFESSIONAL EXPERIENCE</b><br/>
-    <div class="row" *ngIf="experienceMockdata?.length">
-        <div *ngFor="let value of experienceMockdata" style="margin-left:15px;">
-            <div class="row">
-                <div class="col-sm-3" style="font-size:13px;font-weight:700;">
-                    {{value?.jobTitle}},
+    <b *ngIf="experienceMockdata?.length" style="margin-left:20px;">PROFESSIONAL EXPERIENCE</b><br/>
+    <div class="row" *ngIf="experienceMockdata?.length" style="margin-left:20px;">
+        <div *ngFor="let value of experienceMockdata">
+            <div style="margin-right:20px;margin-top:20px;">
+                <div class="row">
+                    <div class="col-sm-3" style="font-size:13px;font-weight:700;">
+                        {{value?.jobTitle}}
+                    </div>
+                    <div class="col-sm-3" style="font-size:11px;font-weight:700;">
+                        {{value?.employer}}
+                    </div>
+                    <div class="col-sm-3" style="font-size:11px;font-weight:600;">
+                        <i><span>{{value?.city}},</span>&nbsp;{{value?.state}}&nbsp;
+                        <span>,{{value?.country}}</span></i>
+                    </div>
+                    <div class="col-sm-3" style="font-size:11px;font-weight:700;">
+                        {{value?.fromDate | date:'mediumDate'}} to {{value?.toDate | date:'mediumDate'}}
+                    </div>
                 </div>
-                <div class="col-sm-3" style="font-size:11px;font-weight:700;">
-                    {{value?.employer}},
-                </div>
-                <div class="col-sm-3" style="font-size:11px;font-weight:700;">
-                    {{value?.fromDate}} to {{value?.toDate}}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    {{value?.jobDescription}}
+                <div class="row" style="margin-top:10px;">
+                    <div class="col">
+                        {{value?.jobDescription}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <hr/>
+    <b *ngIf="educationMockData?.length" style="margin-left:20px;">EDUCATION</b>
+    <div *ngIf="educationMockData?.length" style="margin-bottom:20px;">
+        <div *ngFor="let value of educationMockData" style="margin-left:20px;margin-top:20px;margin-right:20px;">
+            <div class="row">
+                <div class="col-sm-6" style="font-size:13px;font-weight:700;">
+                    {{value?.educationType}} 
+                    <span *ngIf="value?.branch" style="margin-left:10px;">
+                       <span style="font-weight:500;">in</span>&nbsp;{{value?.branch}}
+                    </span>
+                </div>
+                <div class="col" style="font-size:11px;font-weight:700;">
+                    <i><span style="font-size:small">{{value?.district}},</span>&nbsp;{{value?.state}}&nbsp;
+                        <span>,{{value?.country}}</span></i>
+                 </div>
+                 <div class="col" style="font-size:11px;font-weight:700;">
+                    {{value?.startDate | date:'mediumDate'}} to {{value?.endDate | date:'mediumDate'}}
+                 </div>
+            </div>
+            <div class="row">
+                <div class="col" style="font-size:13px;font-weight:500;">
+                    {{value?.institutionName}}  
+                    <span>
+                        &nbsp; - {{value?.percentage}} %
+                    </span>
+                </div>
+            </div>   
+        </div>
+    </div>  
+    <hr/>
+    <b *ngIf="projectsMockData?.length" style="margin-left:20px;">PROJECTS</b>   
+    <div *ngIf="projectsMockData?.length" style="margin-bottom:20px;margin-left:20px;margin-right:20px;">
+        <div *ngFor="let value of projectsMockData" style="margin-top:20px;margin-left:20px;">
+            <div class="row" style="font-size:13px;font-weight:700px;">
+                <span><b>{{value?.title}}</b></span>
+            </div>
+            <div class="row" style="font-size:11px;font-weight:500px;margin-top:10px;">
+                <span>{{value?.description}}</span>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                <b>Technologies Used -</b>
+                <div *ngFor="let s of value?.skills">
+                    <div class="col" style="margin-left:10px;padding:2px 4px 2px 4px;" id="skillslistsection">{{s.skill}}</div>
+                </div>
+            </div>
+            <div *ngIf="value?.link" class="row" style="margin-top:10px;">
+                <b>Link -</b>
+                {{value?.link}}
+            </div>
+        </div>
+    </div>    
 </div>

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CarService } from 'src/app/_shared/services/carservice';
 import { Districts } from 'src/app/@core/_model/users';
-import { ResumeBuilder, Skills, Experience, Education, buttonClass, PersonalDetails, personaldetailsMock, experienceMock, careerobjMock, skillsMock } from 'src/app/_shared/model/resume-builder';
+import { ResumeBuilder, Skills, Experience, Education, buttonClass, PersonalDetails, personaldetailsMock, experienceMock, careerobjMock, skillsMock, educationMock, projectsMock } from 'src/app/_shared/model/resume-builder';
 import { Product } from 'src/app/_shared/model/product';
 import { NgForm } from '@angular/forms';
 @Component({
@@ -55,6 +55,9 @@ export class ResumebuilderComponent implements OnInit {
   experienceMockdata:any=experienceMock;
   careerObjectiveMock:any=careerobjMock;
   skillsMockData:any=skillsMock;
+  educationMockData:any=educationMock;
+  projectsMockData:any=projectsMock;
+  countryCodes: any;
   constructor(private router:Router,private http:HttpClient,private carService:CarService,private messageService:MessageService) {
       this.resumeBuilder=new ResumeBuilder;
       this.experience=new Experience;
@@ -66,7 +69,6 @@ export class ResumebuilderComponent implements OnInit {
 
     ngOnInit() {
       this.carService.getStates().then(x => {
-        console.log("statessss",x);
         this.states = x;
       });
       this.cols = [
@@ -75,6 +77,10 @@ export class ResumebuilderComponent implements OnInit {
           { field: 'yearOfPassing', header: 'YOP' },
           { field: 'percentage', header: 'Percentage' }
       ];
+      this.carService.getCountryCodes().then(x=>{
+        console.log("countries",x);
+        if(x) this.countryCodes=x;
+      })
       console.log("experienceMockdata",this.experienceMockdata);
   }
 
@@ -98,9 +104,22 @@ export class ResumebuilderComponent implements OnInit {
     onDistrictChange(event?:any){
       console.log("district  change",event)
     }
+    onCountryChange(event?:any){
+      console.log('event',event.name);
+      this.personaldetails.contactNo=`${event.dial_code}`;
+    }
+    onNumberKeyPress(event) {
+      const charCode = (event.which) ? event.which : event.keyCode;
+      if (charCode > 31 && ((charCode < 48 ) || charCode > 57)) {
+        return false;
+      }
+
+      return true;
+  }
     saveSkill(){
       this.skillsformSubmitted=true;
       if(this.skillsform.valid){
+        if(this.skill.skill){
         let index =0;
         index=this.skillsList?.length;
         let obj= new Skills;
@@ -112,6 +131,10 @@ export class ResumebuilderComponent implements OnInit {
         this.skillsformSubmitted=false;
       }
       else{
+        this.showWarn();
+      }
+    }
+      else{
         this.showError();
       }
     }
@@ -121,28 +144,34 @@ export class ResumebuilderComponent implements OnInit {
     }
     addExperience(){
       this.experienceSubmitted=true;
-      if(this.experience.employer && this.experience.experience && this.experience.jobDescription && this.experience.jobTitle){
+      if(this.experience.employer && this.experience.experience && this.experience.jobDescription && this.experience.jobTitle
+         && this.experience.fromDate && this.experience.toDate){
         let obj=new Experience;
         console.log("this.experience",this.experience);
         obj.employer=this.experience.employer;
         obj.jobTitle=this.experience.jobTitle;
         obj.jobDescription=this.experience.jobDescription;
         obj.experience=this.experience.experience;
-        obj.fromDate=new Date();
-        obj.toDate=new Date();
+        obj.fromDate=new Date(this.experience.fromDate);
+        obj.toDate=new Date(this.experience.toDate);
         this.experienceList.push(obj);
         this.experience=new Experience;
         this.experienceSubmitted=false;
       }
       else{
-        this.showError();
+        this.showWarn();
       }
+    }
+    editEducation(event?:any){
+      console.log("event",event);
     }
     editExperience(i:any){
       this.experience.employer=this.experienceList[i].employer;
       this.experience.experience=this.experienceList[i].experience;
       this.experience.jobDescription=this.experienceList[i].jobDescription;
       this.experience.jobTitle=this.experienceList[i].jobTitle;
+      this.experience.fromDate=this.experienceList[i].fromDate;
+      this.experience.toDate=this.experienceList[i].toDate;
       this.experienceList.splice(i,1);
     }
     addEducation(){
@@ -153,6 +182,11 @@ export class ResumebuilderComponent implements OnInit {
         obj.institutionName=this.education.institutionName;
         obj.percentage=this.education.percentage;
         obj.yearOfPassing=this.education.yearOfPassing;
+        obj.state=this.education.startDate;
+        obj.district=this.education.district;
+        obj.country=this.education.country;
+        obj.startDate=new Date(this.education.startDate);
+        obj.endDate=new Date(this.education.endDate);
         this.educationList.push(obj);
         this.education=new Education;
         this.educationSubmitted=false;
@@ -216,7 +250,7 @@ export class ResumebuilderComponent implements OnInit {
   }
 
   showWarn() {
-      this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Message Content'});
+      this.messageService.add({severity:'warn', summary: 'Empty Value', detail: 'Please add some value to save'});
   }
 
   showError() {
