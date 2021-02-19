@@ -9,6 +9,8 @@ import { LayoutService } from './_services/layout.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { AuthenticationServiceService } from '../authentication/authentication-service.service';
+import { AuthService } from '../_shared/helpers/auth.service';
 
 
 export const NB_CORE_PROVIDERS = [
@@ -30,6 +32,7 @@ export const NB_CORE_PROVIDERS = [
     FooterComponent
   ],
   declarations: [LayoutComponent,HeaderComponent,FooterComponent],
+  providers:[AuthService]
 })
 export class CoreModule {
   constructor() {

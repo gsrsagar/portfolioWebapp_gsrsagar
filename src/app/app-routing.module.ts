@@ -1,5 +1,6 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AuthGuard } from './_shared/helpers/auth-guard.service';
 
 export const routes: Routes = [
   {
@@ -8,9 +9,14 @@ export const routes: Routes = [
         .then(m => m.HomeModule) 
   },
   {
+    path: 'authentication',
+    loadChildren:() => import('./authentication/authentication.module')
+        .then(m => m.AuthenticationModule) 
+  },
+  {
         path: 'products',
         loadChildren: () => import('./community/community.module')
-          .then(m => m.CommunityModule),
+          .then(m => m.CommunityModule)
       },
       {
         path: 'courses',

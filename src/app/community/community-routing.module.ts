@@ -7,6 +7,7 @@ import { EducationComponent } from './education/education.component';
 import { SkillsComponent } from './skills/skills.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { PersonaldetailsComponent } from './personaldetails/personaldetails.component';
+import { AuthGuard } from '../_shared/helpers/auth-guard.service';
 
 const routes:Routes=[
    {path:'resumebuilder',component:ResumebuilderComponent},
@@ -18,9 +19,6 @@ const routes:Routes=[
 
    {path:'',redirectTo:'',pathMatch:'full'}
 ]
-
-
-
 
 @NgModule({
     imports:[RouterModule.forChild(routes)],

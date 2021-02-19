@@ -15,7 +15,7 @@ export const items:MenuItem[]= [
       styleClass:'menupanel'
   },
   {
-      label: 'Blogs',
+      label: 'Profile',
       icon:'pi pi-fw pi-comments',
       routerLink:'#',
       styleClass:'menupanel'
