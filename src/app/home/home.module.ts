@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { ThemeModule } from '../@theme/theme.module';
-import { SharedModule } from 'primeng/api';
+import { SharedModule, MessageService, ConfirmationService } from 'primeng/api';
 import { HomeRoutingModule } from './home-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { PlatformModule } from '@angular/cdk/platform';
@@ -23,7 +23,9 @@ import { PlatformModule } from '@angular/cdk/platform';
     ThemeModule,
     PlatformModule,
     SharedModule,
-    HomeRoutingModule
-  ]
+    HomeRoutingModule,
+    HomeComponent
+  ],
+  providers:[MessageService,ConfirmationService]
 })
 export class HomeModule { }

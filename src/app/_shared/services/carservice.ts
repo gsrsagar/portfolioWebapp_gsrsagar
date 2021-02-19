@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Car } from '../domain/car';
+import { SERVERCONFIG } from '../model/app.constant';
 
 @Injectable()
 export class CarService {
+
+     API_BACKEND = `${SERVERCONFIG.BACKEND}/api`;
 
     constructor(private http: HttpClient) {}
 
