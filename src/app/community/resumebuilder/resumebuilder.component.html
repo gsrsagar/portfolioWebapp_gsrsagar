@@ -464,7 +464,108 @@
                 </p-table>
             </div> -->
         </div>
-    </form>   
+    </form>
+      <form #traniningsform="ngForm" novalidate>
+         <div class="card"  style="margin-top:20px;text-align:center;"> 
+            <div class="row">
+                <div class="col">
+                    <span>
+                        <h5> Trainings/ Certifications/ Seminars</h5>
+                    </span>&nbsp;
+                    <button pButton pRipple style="max-width:50%;" type="button" label="save" (click)="saveTraining()" class="p-button-rounded p-button-secondary"></button>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                   <div class="col-md-10 offset-md-1">
+                    <textarea [(ngModel)]="trainingscertificates.trainAndCertificates" style="width:100%;height:200px;"
+                     name="trainingsinput"  id="trainingsinput" placeholder="Enter Here*" pInputTextarea 
+                     #trainingsinput="ngModel" autoResize="autoResize"
+                     [ngClass]="{ 'input-border-green' : !(trainingSubmitted && trainingsinput.invalid),
+                    'input-border-red': trainingSubmitted && trainingsinput.invalid}"
+                     ></textarea>      
+                </div>
+            </div>   
+            <div class="row" style="margin-top:20px;">
+                <div class="col-sm-4" *ngFor="let value of trainingList;let i=index" style="margin-left:0px;">
+                    <p-card  [style]="{'width': '18rem', 'margin-bottom': '2em'}">
+                        <ng-template pTemplate="body">
+                            <p>
+                               {{value.trainAndCertificates}}
+                            </p>             
+                        </ng-template>
+                            <ng-template pTemplate="footer">
+                                 <p-button label="Delete" (click)="confirmDelete(value,i,'training')" icon="pi pi-trash"></p-button>
+                            </ng-template>
+                    </p-card>
+                </div>
+            </div>   
+        </div>
+    </form> 
+    <form #hobbiesform="ngForm" novalidate>
+         <div class="card"  style="margin-top:20px;text-align:center;"> 
+            <div class="row">
+                <div class="col">
+                    <span>
+                        <h5>Interests/ Hobbies*</h5>
+                    </span>&nbsp;
+                    <button pButton pRipple style="max-width:50%;" type="button" label="save" (click)="saveHobby()" class="p-button-rounded p-button-secondary"></button>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                   <div class="col-md-10 offset-md-1">
+                    <textarea [(ngModel)]="interestsHobbies.hobby" style="width:100%;height:200px;"
+                     name="hobbiesinput"  id="hobbiesinput" placeholder="Enter Here*" pInputTextarea 
+                       [required]="hobbyList?.length==0" #hobbiesinput="ngModel" autoResize="autoResize"
+                     [ngClass]="{ 'input-border-green' : !(hobbySubmitted && hobbiesinput.invalid),
+                    'input-border-red': hobbySubmitted && hobbiesinput.invalid}"
+                     ></textarea>      
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-sm-4" *ngFor="let value of hobbyList;let i=index" style="margin-left:0px;">
+                    <p-card  [style]="{'width': '18rem', 'margin-bottom': '2em'}">
+                        <ng-template pTemplate="body">
+                            <p>
+                               {{value.hobby}}
+                            </p>             
+                        </ng-template>
+                            <ng-template pTemplate="footer">
+                                 <p-button label="Delete" (click)="confirmDelete(value,i,'hobby')" icon="pi pi-trash"></p-button>
+                            </ng-template>
+                    </p-card>
+                </div>
+            </div>   
+        </div>
+    </form> 
+    <form #languagesform="ngForm" novalidate>
+         <div class="card"  style="margin-top:20px;text-align:center;"> 
+            <div class="row">
+                <div class="col">
+                    <span>
+                        <h5>Languages*</h5>
+                    </span>&nbsp;
+                    <button pButton pRipple style="max-width:50%;" type="button" label="save" (click)="saveLanguage()" class="p-button-rounded p-button-secondary"></button>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="col" style="margin-top:20px;">
+                   <span class="p-input-icon-left">
+                        <i class="pi pi-pencil"></i>
+                        <input type="text" [(ngModel)]="language.language" pInputText placeholder="Languages"
+                        name="languageinput" id="languageinput" #languageinput="ngModel" [required]="languageList?.length==0" 
+                        [ngClass]="{ 'input-border-green' : !(languageSubmitted && languageinput.invalid),
+                       'input-border-red': languageSubmitted && languageinput.invalid}"
+                        />         
+                    </span>     
+                </div>
+            </div> 
+             <div *ngIf="languageList?.length" class="row" style="margin-top:15px;">
+                <div class="col" *ngFor="let opt of languageList;let i=index">
+                    <p-chip styleClass="icon-chip-class"  [label]="opt.language"  (click)="confirmDelete(opt,i,'language')"></p-chip>
+                </div>
+            </div>  
+        </div>
+    </form>    
     <form #projectsForm="ngForm" novalidate>
          <div class="card"  style="margin-top:20px;text-align:center;"> 
             <div class="row">
@@ -576,115 +677,12 @@
             </div>
              <div class="row" style="margin-top:20px;">
                 <div class="col">
-                    <button pButton type="button" (click)="saveAllFields()" label="Save Form" class="p-button-pencil"></button>
-                </div>
-                <div class="col">
-                    <button pButton ngxPrint  printSectionId="resumeCard" label="Print" [useExistingCss]="true" [disabled]="!preparedResume"  class="p-button-info"></button>
+                    <button pButton type="button" (click)="saveAllFields()" label="Prepare Resume" class="p-button-pencil"></button>
+                    &nbsp; <button pButton ngxPrint  printSectionId="resumeCard" label="Print Resume" [useExistingCss]="true" [disabled]="!preparedResume"  class="p-button-info"></button>
                 </div>
             </div>   
          </div>    
-    </form>  
-    <form #traniningsform="ngForm" novalidate>
-         <div class="card"  style="margin-top:20px;text-align:center;"> 
-            <div class="row">
-                <div class="col">
-                    <span>
-                        <h5> Trainings/ Certifications/ Seminars</h5>
-                    </span>&nbsp;
-                    <button pButton pRipple style="max-width:50%;" type="button" label="save" (click)="saveTraining()" class="p-button-rounded p-button-secondary"></button>
-                </div>
-            </div>
-            <div class="row" style="margin-top:20px;">
-                   <div class="col-md-10 offset-md-1">
-                    <textarea [(ngModel)]="trainingscertificates.trainAndCertificates" style="width:100%;height:200px;"
-                     name="trainingsinput"  id="trainingsinput" placeholder="Enter Here*" pInputTextarea 
-                     #trainingsinput="ngModel" autoResize="autoResize"
-                     [ngClass]="{ 'input-border-green' : !(trainingSubmitted && trainingsinput.invalid),
-                    'input-border-red': trainingSubmitted && trainingsinput.invalid}"
-                     ></textarea>      
-                </div>
-            </div>   
-            <div class="row" style="margin-top:20px;">
-                <div class="col-sm-4" *ngFor="let value of trainingList;let i=index" style="margin-left:0px;">
-                    <p-card  [style]="{'width': '18rem', 'margin-bottom': '2em'}">
-                        <ng-template pTemplate="body">
-                            <p>
-                               {{value.trainAndCertificates}}
-                            </p>             
-                        </ng-template>
-                            <ng-template pTemplate="footer">
-                                 <p-button label="Delete" (click)="confirmDelete(value,i,'training')" icon="pi pi-trash"></p-button>
-                            </ng-template>
-                    </p-card>
-                </div>
-            </div>   
-        </div>
-    </form> 
-    <form #hobbiesform="ngForm" novalidate>
-         <div class="card"  style="margin-top:20px;text-align:center;"> 
-            <div class="row">
-                <div class="col">
-                    <span>
-                        <h5>Interests/ Hobbies*</h5>
-                    </span>&nbsp;
-                    <button pButton pRipple style="max-width:50%;" type="button" label="save" (click)="saveHobby()" class="p-button-rounded p-button-secondary"></button>
-                </div>
-            </div>
-            <div class="row" style="margin-top:20px;">
-                   <div class="col-md-10 offset-md-1">
-                    <textarea [(ngModel)]="interestsHobbies.hobby" style="width:100%;height:200px;"
-                     name="hobbiesinput"  id="hobbiesinput" placeholder="Enter Here*" pInputTextarea 
-                       [required]="hobbyList?.length==0" #hobbiesinput="ngModel" autoResize="autoResize"
-                     [ngClass]="{ 'input-border-green' : !(hobbySubmitted && hobbiesinput.invalid),
-                    'input-border-red': hobbySubmitted && hobbiesinput.invalid}"
-                     ></textarea>      
-                </div>
-            </div>
-            <div class="row" style="margin-top:20px;">
-                <div class="col-sm-4" *ngFor="let value of hobbyList;let i=index" style="margin-left:0px;">
-                    <p-card  [style]="{'width': '18rem', 'margin-bottom': '2em'}">
-                        <ng-template pTemplate="body">
-                            <p>
-                               {{value.hobby}}
-                            </p>             
-                        </ng-template>
-                            <ng-template pTemplate="footer">
-                                 <p-button label="Delete" (click)="confirmDelete(value,i,'hobby')" icon="pi pi-trash"></p-button>
-                            </ng-template>
-                    </p-card>
-                </div>
-            </div>   
-        </div>
-    </form> 
-    <form #languagesform="ngForm" novalidate>
-         <div class="card"  style="margin-top:20px;text-align:center;"> 
-            <div class="row">
-                <div class="col">
-                    <span>
-                        <h5>Languages*</h5>
-                    </span>&nbsp;
-                    <button pButton pRipple style="max-width:50%;" type="button" label="save" (click)="saveLanguage()" class="p-button-rounded p-button-secondary"></button>
-                </div>
-            </div>
-            <div class="row" style="margin-top:20px;">
-                <div class="col" style="margin-top:20px;">
-                   <span class="p-input-icon-left">
-                        <i class="pi pi-pencil"></i>
-                        <input type="text" [(ngModel)]="language.language" pInputText placeholder="Languages"
-                        name="languageinput" id="languageinput" #languageinput="ngModel" [required]="languageList?.length==0" 
-                        [ngClass]="{ 'input-border-green' : !(languageSubmitted && languageinput.invalid),
-                       'input-border-red': languageSubmitted && languageinput.invalid}"
-                        />         
-                    </span>     
-                </div>
-            </div> 
-             <div *ngIf="languageList?.length" class="row" style="margin-top:15px;">
-                <div class="col" *ngFor="let opt of languageList;let i=index">
-                    <p-chip styleClass="icon-chip-class"  [label]="opt.language"  (click)="confirmDelete(opt,i,'language')"></p-chip>
-                </div>
-            </div>  
-        </div>
-    </form>                
+    </form>                 
 </body>
 
 <p-toast></p-toast>
@@ -844,7 +842,38 @@
                 {{value?.link}}
             </div>
         </div>
-    </div>    
+    </div> 
+     <hr/> 
+    <b *ngIf="trainingList?.length" style="margin-left:20px;">TRAININGS/CEDRTIFICATES/SEMINARS</b><br/>  
+      <div *ngIf="trainingList?.length">
+        <div *ngFor="let value of trainingList;let i=index" style="margin-left:20px;margin-top:20px;margin-right:20px;">
+            <div class="row">
+                <div class="col-sm-6">
+                   {{i+1}}&nbsp;.{{value?.trainAndCertificates}} 
+                </div>
+            </div>
+        </div>
+      </div>
+      <hr/>
+       <b *ngIf="hobbyList?.length" style="margin-left:20px;">INTRESTS/HOBBIES</b><br/>  
+      <div *ngIf="hobbyList?.length">
+        <div *ngFor="let value of hobbyList;let i=index" style="margin-left:20px;margin-top:20px;margin-right:20px;">
+            <div class="row">
+                <div class="col-sm-6">
+                   {{i+1}}&nbsp;.{{value?.hobby}} 
+                </div>
+            </div>
+        </div>
+      </div>
+      <hr/>
+        <b *ngIf="languageList?.length" style="margin-left:20px;">LANGUAGES</b><br/>  
+      <div *ngIf="languageList?.length"  class="row">
+        <div *ngFor="let value of languageList;let i=index" style="margin-left:20px;margin-top:20px;margin-right:20px;">
+             <div class="col">
+                {{value?.language}} 
+            </div>
+        </div>
+      </div>           
 </div>
 
 

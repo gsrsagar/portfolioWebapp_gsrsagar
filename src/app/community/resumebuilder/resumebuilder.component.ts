@@ -99,6 +99,7 @@ export class ResumebuilderComponent implements OnInit {
   languageSubmitted: boolean;
   hobbySubmitted:boolean;
   trainingSubmitted:boolean;
+  preparedResumeEnable:boolean=false;
   constructor(private router:Router,
     private http:HttpClient,
     private carService:CarService,
@@ -218,13 +219,13 @@ export class ResumebuilderComponent implements OnInit {
         this.resumeService.getLanguageById(e).subscribe(x=>{
           if(x){
               this.languageList.push(x);
-              this.isProgress=false;
           }
         },err=>{
           this.handleError(err);
           this.isProgress=false;
         })
       })
+      this.isProgress=false;
     }
   }
 
@@ -1124,6 +1125,7 @@ export class ResumebuilderComponent implements OnInit {
           let index= this.resumeBuilderAPIResponse?.languages?.length || 0;
          if(index==0){this.resumeBuilderAPIResponse.languages=[];}
           this.resumeBuilderAPIResponse.languages[index]=x.id;
+          this.modifyResumeData();
 
         }
       },err=>{
@@ -1448,6 +1450,7 @@ export class ResumebuilderComponent implements OnInit {
       this.educationMockData=this.educationList;
       this.projectsMockData=this.projectList;
       this.preparedResume=true;
+      this.showCustomMessage('success','Successfully prepared resume For you', 'You can download using by clicking on print');
     //  this.downloadAsPDF();
     }
     ngOnDestroy() {
@@ -1593,6 +1596,5 @@ showCustomMessage(ser:any,sum:any,det:any) {
   handleError(error:Error |HttpErrorResponse){
     console.error(error);
 }
-
 
 }

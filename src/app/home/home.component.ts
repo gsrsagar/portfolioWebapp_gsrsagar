@@ -42,8 +42,11 @@ export class HomeComponent implements OnInit,OnDestroy{
         this.initComponent();
     }
     initComponent(){
-        if(this.authService?.detail && this.authService?.status)
+        if(this.authService?.detail && this.authService?.status){
         this.showSuccessCustom(this.authService?.status,this.authService?.detail);
+        this.authService.status='';
+        this.authService.detail='';
+        }
     }
     navigate(value?:any){
         this.router.navigateByUrl(`${value}`);

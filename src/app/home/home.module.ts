@@ -6,11 +6,13 @@ import { SharedModule, MessageService, ConfirmationService } from 'primeng/api';
 import { HomeRoutingModule } from './home-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { PlatformModule } from '@angular/cdk/platform';
+import { ProfileComponent } from './profile/profile.component';
+import { ContactusComponent } from './contactus/contactus.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, ProfileComponent, ContactusComponent],
   imports: [
     CommonModule,
     ThemeModule,

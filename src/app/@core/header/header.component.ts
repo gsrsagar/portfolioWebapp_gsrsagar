@@ -32,9 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 private authenticationService: AuthenticationServiceService,
                 private router: Router
                 )
-                {
-         
-     }   
+                {}   
     ngOnInit(){
         this.initialize();
     }
