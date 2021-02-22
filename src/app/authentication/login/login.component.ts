@@ -39,6 +39,17 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
   registerUser:RegisterUser;
   loginuser:LoginUser;
   passwordNotMatched: boolean;
+  otp: any;
+  errors: any={};
+  otpCheck: boolean;
+  invalidOTP: boolean;
+  registerBtnEnabled: boolean;
+  generatedOtp: any;
+  isOTPSent: boolean;
+  clickedSignUp: boolean;
+  isSubmittedForOtp: boolean;
+  isProgress:boolean;
+  loginDisabled: boolean;
 
   constructor(
     private http: HttpClient,
@@ -105,21 +116,31 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
         this.authService.loginReload=true;
       }
     }
-    changePassword(){
+    forgotPassword(){
       console.log("asf");
+      this.router.navigateByUrl('authentication/verify/changepassword');
     }
 
     loginUser(){
       if(this.loginuser.email && this.loginuser.password){
+        this.isProgress=true;
+        this.loginDisabled=true;
         this.authenticationService.userLogin(this.loginuser).subscribe(x=>{
           if(x){
             this.googleLoginResult=x;
             this.setAuthData(x);
             this.authService.status='Successful';
             this.authService.detail='You are logged in ';
+            this.isProgress=false;
+            this.loginDisabled=false;
             this.showCustomMessage('success','Success','Login Successful');
             this.router.navigateByUrl('home');
           }
+        },err=>{
+          console.log("err",err);
+          this.showErrorCustom(err.error.error,'Please Try Again With Correct Details');
+          this.loginDisabled=false;
+          this.isProgress=false;
         })
       }
       else{
@@ -133,6 +154,7 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
       this.authUser.username=x.user.username;
       this.authUser.first_name=x.user.first_name;
       this.authUser.last_name=x.user.last_name;
+      this.authUser.id=x.user.id;
       this.authService.authUser=this.authUser;
       this.headercomponent.user=this.authUser;
       this.headercomponent.token=this.authUser.token;
@@ -148,6 +170,7 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
     }
     signUpUser(){
       if(this.signupForm.valid){
+        this.clickedSignUp=true;
         if(this.registerUser.password ==this.registerUser.password2){
         this.authenticationService.userSignUp(this.registerUser).subscribe(x=>{
           if(x){
@@ -158,10 +181,14 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
             this.router.navigateByUrl('home');
             this.showCustomMessage('success','Registration Successful','You are logged in now');
           }
+        },err=>{
+          this.clickedSignUp=false;
+          this.showCustomMessage('Error','Failed Registration',err.error.error);
         })
     }
     else{
       this.showErrorCustom('Both Passwords must be same','Please enter same passwords in both fields');
+      this.clickedSignUp=false;
     }
   }
       else{
@@ -204,6 +231,7 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
   prepareLogin(){
       this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
         (googleUser)=>{
+          this.isProgress=true;
           let profile = googleUser.getBasicProfile();
           console.log("googleUser",googleUser)
           console.log('Token ||'+googleUser.getAuthResponse().id_token);
@@ -232,6 +260,7 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
       if(x){
         console.log("Result",x);
         this.setAuthData(x);
+        this.isProgress=false;
          this.zone.run(() => {
             this.router.navigateByUrl(this.returnUrl)
          });  
@@ -241,6 +270,13 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
     })
   }
 
+  onNumberKeyPress(event,desc?:any) {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && ((charCode < 48 ) || charCode > 57)) {
+      return false;
+    }
+    return true;
+}
 
   navigateToApp(){
     if(this.returnUrl){
@@ -252,7 +288,45 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
     }
   }
 
+  checkLength(desc?:any){
+    switch(desc){
+      case 'otp': if( this.otp && `${this.otp}`.length!=6) {
+                  this.errors.otpLengthError=true;}
+                  else this.errors.otpLengthError=false;
+                  break;
+    }
+  }
 
+  validateOTP(){
+    this.otpCheck=true;
+    if(this.otp ==this.generatedOtp){
+      this.registerBtnEnabled=true;
+      this.invalidOTP=false;
+    }
+    else{
+      this.registerBtnEnabled=false;
+      this.invalidOTP=true;
+    }
+  }
+
+  generateOTPSignup(){
+    if(this.signupForm.valid){
+      if(this.registerUser.password ==this.registerUser.password2){
+        this.isSubmittedForOtp=true;
+        this.authenticationService.generateOTPSignUp(this.registerUser.email).subscribe(x=>{
+          if(x){
+            this.generatedOtp=x.frontcopykey;
+            this.showCustomMessage('success',x.Message,x.Status);
+            if(x.frontcopykey) this.isOTPSent=true;
+          }
+        },err=>{
+           console.log("err",err);
+            this.showCustomMessage('error','Failed',err.error.error);
+            this.isSubmittedForOtp=false;
+        })
+      }  
+  }
+}
 
 
   showSuccess() {

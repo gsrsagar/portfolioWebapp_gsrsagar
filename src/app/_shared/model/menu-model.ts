@@ -17,12 +17,12 @@ export const items:MenuItem[]= [
   {
       label: 'Profile',
       icon:'pi pi-fw pi-comments',
-      routerLink:'#',
+      routerLink:'/home/profile',
       styleClass:'menupanel'
   },
   {
-      label: 'AboutUs',
+      label: 'Contact',
       icon:'pi pi-fw pi-book',
-      routerLink:'#',
+      routerLink:'/home/contact',
       styleClass:'menupanel'
   }]

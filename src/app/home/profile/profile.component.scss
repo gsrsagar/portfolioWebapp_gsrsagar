@@ -1,14 +1,3 @@
-body{
-    background-color: white;
-    font-size: 13px;
-   }
-   p-dropdown{
-     font-size: 13px;
-   }
-   input{
-     font-size: 13px;
-   }
-
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     // -webkit-box-shadow: 2px 2px 2px -2px#6a6462;
@@ -76,10 +65,9 @@ body{
         width:100%;
         justify-items: center;
         align-items: center; 
-        padding-right: 70px;
-        padding-left:70px ;
+        padding-right: 73px;
+        padding-left:73px ;
         background: #2196F3;
-        font-size: 13px;
     }
 }
 
@@ -94,7 +82,6 @@ button{
     /* transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s; */
     border-radius: 3px;
     padding:5px 27px 5px 27px;
-    font-size: 13px;
 }
 button:hover{
     color:black;
@@ -107,7 +94,49 @@ button:hover{
       height:auto;
     }
   }
+
+
+
+  body{
+    background-color: white;
+    font-size: 13px;
+   }
+   p-dropdown{
+     font-size: 13px;
+   }
+   input{
+     font-size: 13px;
+   }
   
+
+   .label-required-error {
+    color: #d41c4d;
+    font-weight: 700;
+    font-size: 11px;
+  }
+  .label-successful {
+    color: #0C9ED2;;
+    font-weight: 700;
+    font-size: 11px;
+    margin-top:5px;
+  }
+  .input-border-green {
+    border-left-color: #0C9ED2 !important;
+    border-left-width: medium;
+   }
+  
+   .input-border-red {
+    border-left-color: #d41c4d !important;
+    border-left-width: medium;
+    border:1px solid  #d41c4d !important
+   }
+
+   :host ::ng-deep{
+    .p-toast{
+      width:300px;
+      height:auto;
+    }
+  }
 
 
 
@@ -148,4 +177,3 @@ button:hover{
         stroke: #FFA62B;
     }
   }
-  

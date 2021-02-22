@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SERVERCONFIG, AuthUser } from '../_shared/model/app.constant';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { GoogleLogin, LoginUser, RegisterUser } from '../_shared/model/resume-builder';
+import { GoogleLogin, LoginUser, RegisterUser, ForgotPassword, ChangePassword, ModifyUser } from '../_shared/model/resume-builder';
 import { Observable } from 'rxjs';
 import { AuthService } from '../_shared/helpers/auth.service';
 
@@ -37,6 +37,33 @@ export class AuthenticationServiceService {
     let url =`${this.API_BACKEND}/login/`;
     return this.http.post(url,data) as Observable<any>;
   }
+  sendOtp(email:string){
+    let data={email:email};
+    let url =`${this.API_BACKEND}/get_otp_key/`;
+    return this.http.post(url,data) as Observable<any>;
+  }
+  generateOTPSignUp(email:string){
+    let data={email:email};
+    let url =`${this.API_BACKEND}/generate_otp_key/`;
+    return this.http.post(url,data) as Observable<any>;
+  }
+  changePassword(changePassword:ChangePassword){
+    this.setHeaders();
+    let data=changePassword;
+    let url =`${this.API_BACKEND}/change_password/`;
+    return this.http.post(url,data,{headers:this.headers}) as Observable<any>;
+  }
+  forgotPassword(forgotPassword:ForgotPassword){
+    let data=forgotPassword;
+    let url =`${this.API_BACKEND}/forgot_password/`;
+    return this.http.post(url,data) as Observable<any>;
+  }
+  modifyUserDetais(modifyUser:ModifyUser){
+    this.setHeaders();
+    let data=modifyUser;
+    let url =`${this.API_BACKEND}/modify_user_details/`;
+    return this.http.post(url,data,{headers:this.headers}) as Observable<any>;
+  } 
 
   userSignUp(signUp:RegisterUser){
     let data={

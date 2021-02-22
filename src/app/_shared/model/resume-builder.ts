@@ -186,6 +186,15 @@ export class InterestsHobbies{
     hobby:string;
 }
 
+export class ModifyUser{
+    email:string;
+    username:string;
+    first_name:string;
+    last_name:string;
+    password:string;
+    id:any
+}
+
 export const buttonClass=[
     {skillClass:"p-button-raised p-button-text"},
     {skillClass:"p-button-raised p-button-secondary p-button-text"},
