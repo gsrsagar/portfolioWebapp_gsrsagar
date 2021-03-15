@@ -49,7 +49,7 @@ Products Page
 
 ![products](https://user-images.githubusercontent.com/44350754/111123907-e562a280-8595-11eb-873c-60921160f9f4.png)
 
-App Resume Builder Page Mobile view responsive
+Profile Page Once logged In
 
 ![profile](https://user-images.githubusercontent.com/44350754/111123969-f7444580-8595-11eb-9223-7b6683c4f232.png)
 
