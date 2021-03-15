@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
   isSubmittedForOtp: boolean;
   isProgress:boolean;
   loginDisabled: boolean;
+  simpleName = 123;
 
   constructor(
     private http: HttpClient,
@@ -87,6 +88,13 @@ export class LoginComponent implements OnInit ,AfterViewInit ,OnDestroy{
     this.googleInitialize();
     this.setLoginPanel();
     }
+    
+getVarName(obj: object):any {
+    const keys = Object.keys(obj);
+    console.log("keys",keys);
+    // console.assert(keys.length == 1, 'key count must be 1');
+    return keys[0];
+}
 
     setLoginPanel(){
       this.items = [

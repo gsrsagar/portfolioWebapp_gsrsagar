@@ -1,11 +1,11 @@
 [
     {
-        "TARGET_SERVER": true,
+        "TARGET_SERVER": false,
         "SERVER": "LOCAL",
         "API_BACKEND": "http://localhost:8000"
     },
     {
-        "TARGET_SERVER": false,
+        "TARGET_SERVER": true,
         "SERVER": "PRODUCTION",
         "API_BACKEND": "http://localhost:8001"
     }

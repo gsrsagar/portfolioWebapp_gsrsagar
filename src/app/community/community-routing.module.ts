@@ -11,6 +11,7 @@ import { AuthGuard } from '../_shared/helpers/auth-guard.service';
 
 const routes:Routes=[
    {path:'resumebuilder',component:ResumebuilderComponent},
+   {path:'skills',component:SkillsComponent},
    {path:'',component:CommunityComponent},
    {path:'resumebuilder/steps/education',component:EducationComponent},
    {path:'resumebuilder/steps/skils',component:SkillsComponent},

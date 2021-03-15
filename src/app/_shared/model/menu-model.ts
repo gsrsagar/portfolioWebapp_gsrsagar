@@ -25,4 +25,11 @@ export const items:MenuItem[]= [
       icon:'pi pi-fw pi-book',
       routerLink:'/home/contact',
       styleClass:'menupanel'
-  }]
+  },
+  {
+    label: 'Skills',
+    icon:'pi pi-fw pi-book',
+    routerLink:'/products/skills',
+    styleClass:'menupanel'
+}
+]
