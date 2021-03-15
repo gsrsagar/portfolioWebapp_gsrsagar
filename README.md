@@ -40,7 +40,7 @@ Login Page
 ![login](https://user-images.githubusercontent.com/44350754/111123875-db40a400-8595-11eb-81a6-4caf9d08803d.png)
 
 
-Signup Page
+Signup Page Mobile view
 
 ![signup](https://user-images.githubusercontent.com/44350754/111124055-0aefac00-8596-11eb-8b8b-a024b232fe33.png)
 
